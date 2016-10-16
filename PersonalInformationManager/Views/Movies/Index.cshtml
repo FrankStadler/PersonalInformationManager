@@ -1,0 +1,114 @@
+﻿@model PagedList.IPagedList<PersonalInformationManager.Models.Movie>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+<div>&nbsp;</div>
+<h2>Movie List</h2>
+<hr />
+<div>&nbsp;</div>
+<div class="col-md-3">
+    <a href="@Url.Action("Index","Home")"><img src="~/images/back.jpg" width="50" height="50" />Back to the Home Page</a>
+</div>
+<div class="col-md-3">
+    <a href="@Url.Action("Create","Movies")"><img src="~/images/add.png" width="50" height="50" />Add</a>
+</div>
+
+
+    @using (Html.BeginForm("Index", "Movies", FormMethod.Get, new { autocomplete = "off" }))
+    {
+        <div class="col-md-6">
+            <img src="~/images/search.jpg" width="50" height="50" />
+            Find by title: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" />
+        @if (ViewBag.CurrentFilter != null)
+        {
+            <p>
+                <span style="font-style:italic">searching for @ViewBag.CurrentFilter</span>
+            </p>
+        }
+        </div>
+    }
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+    <table class="table table-striped">
+
+        @if (Model.Count > 0)
+        {
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Image)
+                    </th>
+                    <th>
+                        @Html.ActionLink(Html.DisplayNameFor(model => model.FirstOrDefault().Title).ToString(), "Index", new { sortOrder = ViewBag.TitleSortParm })
+                        @if (ViewBag.CurrentSort == "title_desc")
+                        {
+                            <img src="~/images/descending.png" width="12" height="25" />
+                        }
+                        @if (ViewBag.CurrentSort == "title_asc")
+                        {
+                            <img src="~/images/ascending.png" width="12" height="25" />
+                        }
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Source)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().ReleaseDate)
+                    </th>
+                    <th>
+                        @Html.ActionLink(Html.DisplayNameFor(model => model.FirstOrDefault().ViewedDate).ToString(), "Index", new { sortOrder = ViewBag.ViewDateSortParm })
+                        @if (ViewBag.CurrentSort == "view_date_desc")
+                        {
+                            <img src="~/images/descending.png" width="12" height="25" />
+                        }
+                        @if (ViewBag.CurrentSort == "view_date_asc")
+                        {
+                            <img src="~/images/ascending.png" width="12" height="25" />
+                        }
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+        }
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (item.Image != null)
+                {
+                        <a href="@Url.Action("Details","Movies", new {id = item.MovieID})">
+                            <img src="@Url.Action("GetMovieImg", "Movies", new { id = item.MovieID })" alt="@item.Title" title="@item.Title" />
+                        </a>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink(item.Title, "Details", new { id = item.MovieID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Source.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ViewedDate)
+                </td>
+                <td></td>
+            </tr>
+        }
+
+    </table>
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+

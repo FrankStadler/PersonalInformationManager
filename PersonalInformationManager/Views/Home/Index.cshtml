@@ -1,0 +1,35 @@
+﻿@model PersonalInformationManager.ViewModels.HomeDashboard
+    @{
+        ViewBag.Title = "Home Page";
+    }
+    <div>&nbsp;</div>
+    <div class="jumbotron">
+
+        <p>This application is used to manage your own lists of TV Shows, Books, and Movies.  You can use this app to easily keep track of what you have watched in one spot. You can also use this app to record future releases so you can always be on top of your favorite TV Shows, Books, and Movies.</p>
+
+        <p>This application was developed as a reference application by Frank Stadler to demonstrate the creation of a small MVC / Entity Framework web application.</p>
+
+        <p>The GitHub repo also includes a sample user guide and technical solution documention. Please refer to these documents for more detail (and for an example of technical writing appropriate for such an application).</p>
+
+    </div>
+    <div>
+    <h2>Recently Viewed</h2>
+    <dl class="dl-horizontal">
+        <dt>Books</dt>
+        <dd>
+            @Html.DisplayFor(model => model.book.Title) on
+        @Html.DisplayFor(model => model.book.ViewedDate)
+    </dd>
+    <dt>Movies</dt>
+    <dd>
+        @Html.DisplayFor(model => model.movie.Title) on
+    @Html.DisplayFor(model => model.movie.ViewedDate)
+   </dd>
+   <dt>TV Shows</dt>
+   <dd>
+       @Html.DisplayFor(model => model.show.Title) on
+       @Html.DisplayFor(model => model.show.ViewedDate)
+   </dd>
+   </dl>
+</div>
+

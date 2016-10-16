@@ -1,0 +1,79 @@
+﻿@model PersonalInformationManager.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+<div>&nbsp;</div>
+<h2>Details</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    <div>&nbsp;</div>
+    <div class="col-md-4">
+        <a href="@Url.Action("Index","Books")"><img src="~/images/back.jpg" width="50" height="50" />Back to List</a>
+    </div>
+    <div class="col-md-4">
+        <a href="@Url.Action("Edit","Books",new { id = Model.BookID })"><img src="~/images/edit.png" width="50" height="50" />Edit</a>
+    </div>
+    <div class="col-md-4">
+        <a href="@Url.Action("Delete","Books",new { id = Model.BookID })"><img src="~/images/delete.png" width="50" height="50" />Delete</a>
+    </div>
+    <div>&nbsp;</div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dd>
+            @if (Model.Image != null)
+            {
+                <img src="@Url.Action("GetBookImg", "Books", new { id = Model.BookID })" alt="@Model.Title" title="@Model.Title" />
+            }
+            <p></p>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Source)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Source.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ViewedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ViewedDate)
+        </dd>
+        <dt>
+        </dt>
+        <dd>
+            <p></p>
+        </dd>
+    </dl>
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>

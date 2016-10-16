@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PersonalInformationManager.Models.Source>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div>&nbsp;</div>
+<h2>Sources List</h2>
+<hr />
+<div>&nbsp;</div>
+<div class="col-md-3">
+    <a href="@Url.Action("Index","Home")"><img src="~/images/back.jpg" width="50" height="50" />Back to the Home Page</a>
+</div>
+<div class="col-md-3">
+    <a href="@Url.Action("Create","Sources")"><img src="~/images/add.png" width="50" height="50" />Add</a>
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Details", new { id = item.SourceID })
+                </td>
+                <td></td>
+            </tr>
+        }
+    </table>
+
+   

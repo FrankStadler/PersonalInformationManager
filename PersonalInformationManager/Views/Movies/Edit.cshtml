@@ -1,0 +1,88 @@
+﻿@model PersonalInformationManager.Models.Movie
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div>&nbsp;</div>
+<h2>Edit</h2>
+<h4>Movie</h4>
+<hr />
+<div>&nbsp;</div>
+<div>
+    <a href="@Url.Action("Index","Movies")"><img src="~/images/back.jpg" width="50" height="50" />Back to List</a>
+</div>
+<div>&nbsp;</div>
+<hr />
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data", autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+       
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MovieID)
+        @Html.HiddenFor(model => model.Image)
+
+        <div class="form-group">
+            <div class="control-label col-md-2"></div>
+            <div class="col-md-10">
+                @if (Model.Image != null)
+                {
+                    <img src="@Url.Action("GetMovieImg", "Movies", new { id = Model.MovieID })" alt="@Model.Title" title="@Model.Title" />
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Source, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("SourceID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Source, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReleaseDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ReleaseDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ViewedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ViewedDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ViewedDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input name="ImageFile" type="file" />
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" /> &nbsp;&nbsp;
+                @Html.ActionLink("Cancel", "Index", "Movie", new { @class = "btn btn-default" })
+            </div>
+        </div>
+    </div>
+}
+<p></p>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

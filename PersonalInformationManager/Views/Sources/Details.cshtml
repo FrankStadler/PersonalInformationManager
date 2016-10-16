@@ -1,0 +1,36 @@
+﻿@model PersonalInformationManager.Models.Source
+
+@{
+    ViewBag.Title = "Details";
+}
+<div>&nbsp;</div>
+<h2>Details</h2>
+
+<div>
+    <h4>Source</h4>
+    <hr />
+    <div>&nbsp;</div>
+    <div class="col-md-4">
+        <a href="@Url.Action("Index","Sources")"><img src="~/images/back.jpg" width="50" height="50" />Back to List</a>
+    </div>
+    <div class="col-md-4">
+        <a href="@Url.Action("Edit","Sources",new { id = Model.SourceID })"><img src="~/images/edit.png" width="50" height="50" />Edit</a>
+    </div>
+    <div class="col-md-4">
+        <a href="@Url.Action("Delete","Sources",new { id = Model.SourceID })"><img src="~/images/delete.png" width="50" height="50" />Delete</a>
+    </div>
+    <div>&nbsp;</div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
